@@ -74,19 +74,32 @@
     @apply bg-background text-foreground;
   }
   html {
-    font-family: "Poppins", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-weight: 400;
     font-style: normal;
   }
 }
 
 h1 {
-  @apply font-extrabold text-6xl;
+  @apply font-extrabold text-3xl md:text-5xl lg:text-6xl;
 }
 
 h2 {
-  @apply font-extrabold text-[32px];
+  @apply text-xl font-[410] text-gray-700 md:text-3xl  lg:text-4xl;
 }
 h3 {
   @apply font-bold text-[24px];
+}
+h4 {
+  @apply font-semibold text-primary text-3xl;
+}
+h5 {
+  @apply font-semibold text-gray-700 text-lg;
+}
+
+/* Define focus styles */
+.input:focus {
+  border-color: var(--border);
+  outline: 0;
+  box-shadow: 0 0 0 1px rgba(37, 37, 37, 0.5);
 }
