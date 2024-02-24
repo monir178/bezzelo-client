@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { useFadeIn } from "@/hooks/useZoomIn";
 import useScrollToTop from "@/hooks/useScrollToTop";
 import axios from "axios";
+import useToken from "@/hooks/useToken";
 
 type TFormData = {
   name: string;
@@ -33,6 +34,8 @@ const SignUp = () => {
   } = useForm<TFormData>();
 
   const [signUpError, setSignUpError] = useState("");
+  const [createdUserEmail, setCreatedUserEmail] = useState({ email: "" });
+  const [token] = useToken(createdUserEmail);
 
   const authContext = useContext(AuthContext);
 
@@ -50,7 +53,6 @@ const SignUp = () => {
     logOut: () => Promise.reject(new Error("logOut is not implemented")),
     loading: false,
   };
-
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -62,8 +64,7 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success("User Created Successfully");
-        saveUserToDb(data.name, data.email, data.phoneNumber);
-        navigate(from, { replace: true });
+        saveUserToDbEmailSignUp(data.name, data.email, data.phoneNumber);
       })
       .catch((err) => {
         setSignUpError(err.message);
@@ -71,19 +72,52 @@ const SignUp = () => {
       });
   };
 
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, navigate, from]);
+
   // google sign up
   const googleProvider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
+        const { displayName, email } = user;
+        saveGoogleUserToDb(displayName, email).then(() => {
+          navigate(from, { replace: true });
+        });
         console.log(user);
-        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));
   };
 
-  const saveUserToDb = async (
+  const saveGoogleUserToDb = async (displayName: string, email: string) => {
+    try {
+      const response = await axios.post("http://localhost:5000/users", {
+        displayName,
+        email,
+      });
+      setCreatedUserEmail({ email });
+
+      // Fetch the JWT token after saving the Google user
+      const tokenResponse = await axios.get(
+        `http://localhost:5000/jwt?email=${email}`
+      );
+      const tokenData = tokenResponse.data;
+      if (tokenData.accessToken) {
+        localStorage.setItem("accessToken", tokenData.accessToken);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Error saving Google user to database:", error);
+      throw error;
+    }
+  };
+
+  const saveUserToDbEmailSignUp = async (
     name: string,
     email: string,
     phoneNumber: string
@@ -94,6 +128,7 @@ const SignUp = () => {
         email: email,
         phoneNumber: phoneNumber,
       });
+      setCreatedUserEmail({ email });
       console.log(response.data);
     } catch (error) {
       console.error("Error saving user to database:", error);

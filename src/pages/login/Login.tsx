@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -14,6 +14,8 @@ import { FaGoogle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useFadeIn } from "@/hooks/useZoomIn";
 import useScrollToTop from "@/hooks/useScrollToTop";
+import useToken from "@/hooks/useToken";
+import axios from "axios";
 
 type TFormData = {
   email: string;
@@ -50,42 +52,17 @@ const Login = () => {
       logOut: () => Promise.reject(new Error("logOut is not implemented")),
       loading: false,
     };
-  const [loginError, setLoginError] = useState<string>("");
-
-  // const [loginUserEmail, setLoginUserEmail] = useState<string>("");
-  // const [token] = useToken(loginUserEmail);
-
-  const [data, setData] = useState({
-    email: "",
-  });
+  const [loginError, setLoginError] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [token, from, navigate]);
+  const [loginUserEmail, setLoginUserEmail] = useState({ email: "" });
+  const [token] = useToken(loginUserEmail);
 
-  // const saveUser = (name, email) => {
-  //   const user = { name, email };
-  //   fetch("http://localhost:5000/users", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(user),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("save user data", data);
-  //       // Now you can save the token if needed
-  //       // For example, if you receive a token in the response, you can save it here
-  //       // saveToken(data.token);
-  //     })
-  //     .catch((error) => console.error("Error saving user:", error));
-  // };
+  const [data, setData] = useState({
+    email: "",
+  });
 
   // Email sign In
   const handleLogin = (data: TFormData) => {
@@ -95,8 +72,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // setLoginUserEmail(data.email);
-        navigate(from, { replace: true });
+        setLoginUserEmail({ email: data.email });
       })
       .catch((err) => {
         console.log(err.message);
@@ -104,17 +80,48 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, navigate, from]);
+
   // Google sign In
   const googleProvider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
+        const { displayName, email } = user;
+        saveGoogleUserToDb(displayName, email).then(() => {
+          navigate(from, { replace: true });
+        });
         console.log(user);
-        // saveUser(user.displayName, user.email); // Call saveUser with user's name and email
-        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));
+  };
+
+  const saveGoogleUserToDb = async (displayName: string, email: string) => {
+    try {
+      const response = await axios.post("http://localhost:5000/users", {
+        displayName,
+        email,
+      });
+      setLoginUserEmail({ email });
+
+      const tokenResponse = await axios.get(
+        `http://localhost:5000/jwt?email=${email}`
+      );
+      const tokenData = tokenResponse.data;
+      if (tokenData.accessToken) {
+        localStorage.setItem("accessToken", tokenData.accessToken);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Error saving Google user to database:", error);
+      throw error;
+    }
   };
 
   // Reset password
