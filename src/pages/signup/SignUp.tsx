@@ -93,15 +93,18 @@ const SignUp = () => {
 
   const saveGoogleUserToDb = async (displayName: string, email: string) => {
     try {
-      const response = await axios.post("http://localhost:5000/users", {
-        displayName,
-        email,
-      });
+      const response = await axios.post(
+        "https://bezello-server.vercel.app/users",
+        {
+          displayName,
+          email,
+        }
+      );
       setCreatedUserEmail({ email });
 
       // Fetch the JWT token after saving the Google user
       const tokenResponse = await axios.get(
-        `http://localhost:5000/jwt?email=${email}`
+        `https://bezello-server.vercel.app/jwt?email=${email}`
       );
       const tokenData = tokenResponse.data;
       if (tokenData.accessToken) {
@@ -121,11 +124,14 @@ const SignUp = () => {
     phoneNumber: string
   ) => {
     try {
-      const response = await axios.post("http://localhost:5000/users", {
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-      });
+      const response = await axios.post(
+        "https://bezello-server.vercel.app/users",
+        {
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+        }
+      );
       setCreatedUserEmail({ email });
     } catch (error) {
       console.error("Error saving user to database:", error);

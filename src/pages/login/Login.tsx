@@ -98,14 +98,17 @@ const Login = () => {
 
   const saveGoogleUserToDb = async (displayName: string, email: string) => {
     try {
-      const response = await axios.post("http://localhost:5000/users", {
-        displayName,
-        email,
-      });
+      const response = await axios.post(
+        "https://bezello-server.vercel.app/users",
+        {
+          displayName,
+          email,
+        }
+      );
       setLoginUserEmail({ email });
 
       const tokenResponse = await axios.get(
-        `http://localhost:5000/jwt?email=${email}`
+        `https://bezello-server.vercel.app/jwt?email=${email}`
       );
       const tokenData = tokenResponse.data;
       if (tokenData.accessToken) {

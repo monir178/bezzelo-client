@@ -12,7 +12,7 @@ const useToken = (email: TEmail) => {
     const fetchToken = async () => {
       try {
         if (email && email.email) { // Check if email and email.email exist
-          const response = await axios.get(`http://localhost:5000/jwt?email=${email.email}`);
+          const response = await axios.get(`https://bezello-server.vercel.app/jwt?email=${email.email}`);
           const data = response.data;
           if (data.accessToken) {
             localStorage.setItem("accessToken", data.accessToken);

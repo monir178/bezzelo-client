@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getSingleProduct = async ({ productId }: { productId: number }) => {
-    const response = await axios.get(`http://localhost:5000/product/${productId}`)
+    const response = await axios.get(`https://bezello-server.vercel.app/product/${productId}`)
 
     return response;
 };

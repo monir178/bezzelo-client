@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const getCategories = async () => {
-    return await axios.get("http://localhost:5000/categories")
+    return await axios.get("https://bezello-server.vercel.app/categories")
 };
