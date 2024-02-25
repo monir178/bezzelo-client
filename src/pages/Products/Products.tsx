@@ -16,7 +16,6 @@ const Products = () => {
     queryKey: ["categories", id],
     queryFn: () => getCategoryProducts({ categoryId: id }),
   });
-  console.log(categoryData);
 
   if (isLoading) {
     return <CustomerLoading />;

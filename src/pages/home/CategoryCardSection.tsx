@@ -17,7 +17,6 @@ export const animateCardImage = {
 
 const CategoryCardSection = () => {
   const { data: categories, isLoading, isError } = useGetCategories();
-  console.log(categories);
 
   const categorySection = {
     hidden: {

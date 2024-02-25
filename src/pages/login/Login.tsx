@@ -66,16 +66,14 @@ const Login = () => {
 
   // Email sign In
   const handleLogin = (data: TFormData) => {
-    console.log(data);
     setLoginError("");
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
         setLoginUserEmail({ email: data.email });
       })
       .catch((err) => {
-        console.log(err.message);
         setLoginError(err.message);
       });
   };
@@ -93,10 +91,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const { displayName, email } = user;
-        saveGoogleUserToDb(displayName, email).then(() => {
-          navigate(from, { replace: true });
-        });
-        console.log(user);
+        saveGoogleUserToDb(displayName, email).then(() => {});
       })
       .catch((err) => console.error(err));
   };

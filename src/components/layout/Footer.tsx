@@ -65,9 +65,7 @@ const Footer = () => {
                 <Link to="https://www.facebook.com/bezzelobd" target="_blank">
                   <FaFacebook className="size-6 text-blue-700" />
                 </Link>
-                <Link
-                  to="https://api.whatsapp.com/send?phone=+8801576790198"
-                  target="_blank">
+                <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
                   <IoLogoWhatsapp className="size-6 text-green-600" />
                 </Link>
                 <img className="size-8" src={instaIc} alt="" />

@@ -32,10 +32,16 @@ const SingleProduct = () => {
     detail_img,
     style,
     weight,
-  } = productData?.data?.data || {};
-  console.log(category_name);
+    fructose,
+    glucose,
+    moisture,
+    sucrose,
+    taste,
+    undetermined,
 
-  console.log(productData?.data?.data);
+    maltose,
+    reducing_sugar,
+  } = productData?.data?.data || {};
 
   if (isLoading) {
     return <CustomerLoading />;
@@ -82,13 +88,30 @@ const SingleProduct = () => {
             </h2>
             <ul className="list-none font-medium text-gray-700 tracking-wide">
               <li className="mb-2 font-semibold">{description}</li>
-              <li>Color:{color}</li>
-              <li>Capacity: {capacity}</li>
-              <li>Size: {size}</li>
-              <li>Occasion: {occasion}</li>
-              <li>Occasion: {occasion}</li>
-              <li>Weight: {weight}</li>
-              <li>Style: {style}</li>
+
+              {productData?.data?.data.category_id === 1 && (
+                <>
+                  <li>Color: {color}</li>
+                  <li>Capacity: {capacity}</li>
+                  <li>Size: {size}</li>
+                  <li>Occasion: {occasion}</li>
+                  <li>Weight: {weight}</li>
+                  <li>Style: {style}</li>
+                </>
+              )}
+              {productData?.data?.data.category_id === 2 && (
+                <>
+                  <li>Moisture: {moisture}</li>
+                  <li>Sucrose: {sucrose}</li>
+                  <li>Fructose: {fructose}</li>
+
+                  <li>Maltose: {maltose}</li>
+                  <li>Reducing Sugar: {reducing_sugar}</li>
+                  <li>Taste: {taste}</li>
+                  <li>glucose: {glucose}</li>
+                  <li>Undetermined: {undetermined}</li>
+                </>
+              )}
             </ul>
           </div>
 

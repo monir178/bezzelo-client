@@ -62,13 +62,12 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
         toast.success("User Created Successfully");
         saveUserToDbEmailSignUp(data.name, data.email, data.phoneNumber);
       })
       .catch((err) => {
         setSignUpError(err.message);
-        console.log(err);
       });
   };
 
@@ -88,7 +87,6 @@ const SignUp = () => {
         saveGoogleUserToDb(displayName, email).then(() => {
           navigate(from, { replace: true });
         });
-        console.log(user);
       })
       .catch((err) => console.error(err));
   };
@@ -129,7 +127,6 @@ const SignUp = () => {
         phoneNumber: phoneNumber,
       });
       setCreatedUserEmail({ email });
-      console.log(response.data);
     } catch (error) {
       console.error("Error saving user to database:", error);
     }
