@@ -29,7 +29,9 @@ const ProductCard = ({ singleCategory }) => {
             className="h-72 lg:h-[340px] mb-4  mx-auto p-8"
             alt=""
           />
-          <h3 className="text-gray-700 ps-6 mb-1">{category_name}</h3>
+          <h3 className="text-gray-700 ps-6 mb-1 truncate pr-4">
+            {category_name}
+          </h3>
           <p className="text-primary font-bold ps-6 text-lg ">৳ {price}</p>
         </Link>
 

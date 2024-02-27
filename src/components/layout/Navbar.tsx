@@ -66,7 +66,7 @@ const Navbar = () => {
       </motion.li>
       {!user ? (
         <motion.li variants={animateNavLink} whileHover="hover">
-          <Button className="bg-white text-primary rounded-3xl  px-7 max-w-32 hover:text-white hover:bg-orange-700 hover:transition-all text-lg">
+          <Button className="bg-white text-primary rounded-3xl  px-7 max-w-32 hover:text-white border md:border-none border-primary hover:bg-orange-700 hover:transition-all text-lg">
             <NavLink to="/login">Login</NavLink>
           </Button>
         </motion.li>
@@ -110,8 +110,12 @@ const Navbar = () => {
         </div>
       </motion.nav>
       {menuOpen && (
-        <div className="grid grid-cols-1 w-3/6 ml-auto rounded-lg bg-accent md:hidden font-semibold py-4 px-2 list-none">
-          <div className="space-y-4 ml-auto">{menuItems}</div>
+        <div className="grid grid-cols-1 w-3/6 ml-auto rounded-lg bg-white border-2 border-t-0 border-r-0 text-primary md:hidden font-semibold py-4 px-2 list-none">
+          <div
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="space-y-4 mx-auto">
+            {menuItems}
+          </div>
         </div>
       )}
     </header>
