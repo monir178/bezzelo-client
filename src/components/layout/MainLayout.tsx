@@ -2,6 +2,17 @@ import { Link, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import whatsapp from "../../assets/icons/whatsapp.svg";
+import { motion } from "framer-motion";
+
+const animateWhatsapp = {
+  hover: {
+    scale: 1.2,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
 
 const MainLayout = () => {
   return (
@@ -9,15 +20,14 @@ const MainLayout = () => {
       <Navbar />
       <Outlet />
       <Footer />
-      <div className="fixed bottom-0">
+      <motion.div
+        variants={animateWhatsapp}
+        whileHover="hover"
+        className="fixed bottom-0 ">
         <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
-          <img
-            src={whatsapp}
-            className="size-16 md:size-28 lg:size-40"
-            alt=""
-          />
+          <img src={whatsapp} className="size-16 md:size-28" alt="" />
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };
