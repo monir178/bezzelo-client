@@ -45,7 +45,7 @@ const BannerSection = () => {
           {bannerImages?.map((image) => (
             <CarouselItem key={image.id}>
               <img
-                className="w-full h-auto mx-auto"
+                className="w-full h-[135px] md:h-full mx-auto"
                 src={image.img}
                 alt="Slide 2"
               />

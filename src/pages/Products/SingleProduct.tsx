@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getSingleProduct } from "../../api/productApi/getSingleProduct";
 import Container from "@/components/ui/Container";
 import CustomerLoading from "@/components/ui/CustomerLoading";
 import { Button } from "@/components/ui/button";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import useScrollToTop from "@/hooks/useScrollToTop";
+import messenger from "../../assets/icons/messenger.svg";
+import whatsapp from "../../assets/icons/whatsapp.svg";
 
 const SingleProduct = () => {
   useScrollToTop();
@@ -132,6 +134,30 @@ const SingleProduct = () => {
               className="rounded-none text-lg py-6 w-4/6 bg-black hover:text-black hover:bg-white tracking-widest">
               ADD TO CART
             </Button>
+          </div>
+          <div className="flex gap-2 w-full flex-col tracking-wider ">
+            <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
+              <Button
+                style={{
+                  boxShadow:
+                    "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                }}
+                className="py-6 w-full bg-green-500 hover:bg-green-700 text-lg rounded-none   tracking-widest">
+                <img src={whatsapp} className="size-14" alt="" /> Order on
+                Whatsapp
+              </Button>
+            </Link>
+            <Link to="https://m.me/bezzelobd" target="_blank">
+              <Button
+                style={{
+                  boxShadow:
+                    "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                }}
+                className="rounded-none text-lg py-6  bg-blue-500 w-full  hover:bg-blue-700 tracking-widest">
+                <img src={messenger} className="size-10 mr-2" alt="" /> Order on
+                Messenger
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
