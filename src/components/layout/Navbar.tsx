@@ -50,13 +50,13 @@ const Navbar = () => {
           Home
         </NavLink>
       </motion.li>
-      <motion.li variants={animateNavLink} whileHover="hover">
+      {/* <motion.li variants={animateNavLink} whileHover="hover">
         <NavLink
           className="flex items-center hover:underline underline-offset-4"
           to="/cart">
           <ShoppingCart className="mr-1" /> Cart
         </NavLink>
-      </motion.li>
+      </motion.li> */}
       <motion.li variants={animateNavLink} whileHover="hover">
         <NavLink
           className="flex items-center hover:underline underline-offset-4"
@@ -95,7 +95,7 @@ const Navbar = () => {
         <Input
           disabled
           type="search"
-          className="bg-white text-secondary h-6 md:h-8 lg:h-10 rounded-3xl w-6/12 mx-4 md:w-4/12 lg:w-1/3 ml-2 md:ml-auto"
+          className="bg-white text-secondary h-8 lg:h-10 rounded-3xl w-6/12 mx-4 md:w-4/12 lg:w-1/3 ml-2 md:ml-auto"
           placeholder="Search"
         />
         <motion.ul className="space-x-3 md:space-x-6  font-semibold text-base items-center hidden md:flex">

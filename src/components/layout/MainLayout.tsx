@@ -24,7 +24,7 @@ const MainLayout = () => {
         variants={animateWhatsapp}
         whileHover="hover"
         className="fixed bottom-0 ">
-        <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
+        <Link to="whatsapp://send?phone=+8801576790198" target="_blank">
           <img src={whatsapp} className="size-16 md:size-28" alt="" />
         </Link>
       </motion.div>

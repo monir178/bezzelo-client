@@ -117,7 +117,7 @@ const SingleProduct = () => {
             </ul>
           </div>
 
-          <div className="flex gap-6 tracking-wider">
+          {/* <div className="flex gap-6 tracking-wider">
             <Button
               style={{
                 boxShadow:
@@ -134,31 +134,58 @@ const SingleProduct = () => {
               className="rounded-none text-lg py-6 w-4/6 bg-black hover:text-black hover:bg-white tracking-widest">
               ADD TO CART
             </Button>
-          </div>
-          <div className="flex gap-2 w-full flex-col tracking-wider ">
-            <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
-              <Button
-                style={{
-                  boxShadow:
-                    "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
-                }}
-                className="py-6 w-full bg-green-500 hover:bg-green-700 text-lg rounded-none   tracking-widest">
-                <img src={whatsapp} className="size-14" alt="" /> Order on
-                Whatsapp
-              </Button>
-            </Link>
-            <Link to="https://m.me/bezzelobd" target="_blank">
-              <Button
-                style={{
-                  boxShadow:
-                    "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
-                }}
-                className="rounded-none text-lg py-6  bg-blue-500 w-full  hover:bg-blue-700 tracking-widest">
-                <img src={messenger} className="size-10 mr-2" alt="" /> Order on
-                Messenger
-              </Button>
-            </Link>
-          </div>
+          </div> */}
+          {productData?.data?.data.category_id === 2 ? (
+            <div className="flex gap-2 lg:gap-4 flex-col lg:flex-row w-full ">
+              <Link to="whatsapp://send?phone=+8801576790198" target="_blank">
+                <Button
+                  style={{
+                    boxShadow:
+                      "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                  }}
+                  className="py-6 w-full bg-green-500 hover:bg-green-700 text-lg rounded-none tracking-wide">
+                  <img src={whatsapp} className="size-14" alt="" /> Order on
+                  Whatsapp
+                </Button>
+              </Link>
+              <Link to="https://m.me/freshnfairbd/" target="_blank">
+                <Button
+                  style={{
+                    boxShadow:
+                      "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                  }}
+                  className="rounded-none text-lg py-6  bg-blue-500 w-full  hover:bg-blue-700 tracking-wide">
+                  <img src={messenger} className="size-10 mr-2" alt="" /> Order
+                  on Messenger
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex gap-2 lg:gap-4 flex-col lg:flex-row w-full ">
+              <Link to="whatsapp://send?phone=+8801993123477" target="_blank">
+                <Button
+                  style={{
+                    boxShadow:
+                      "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                  }}
+                  className="py-6 w-full bg-green-500 hover:bg-green-700 text-lg rounded-none tracking-wide">
+                  <img src={whatsapp} className="size-14" alt="" /> Order on
+                  Whatsapp
+                </Button>
+              </Link>
+              <Link to="https://m.me/bezzelobd" target="_blank">
+                <Button
+                  style={{
+                    boxShadow:
+                      "15px 9px 12px -4px rgba(0, 0, 0, 0.25), -2px 20px 12px -7px rgba(0, 0, 0, 0.2)",
+                  }}
+                  className="rounded-none text-lg py-6  bg-blue-500 w-full  hover:bg-blue-700 tracking-wide">
+                  <img src={messenger} className="size-10 mr-2" alt="" /> Order
+                  on Messenger
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </Container>

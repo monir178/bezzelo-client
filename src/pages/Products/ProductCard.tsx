@@ -35,14 +35,16 @@ const ProductCard = ({ singleCategory }) => {
           <p className="text-primary font-bold ps-6 text-lg ">৳ {price}</p>
         </Link>
 
-        <div className="flex mt-6 tracking-wider">
-          <Button className="rounded-none w-full tracking-widest">
-            BUY NOW
-          </Button>
-          <Button className="rounded-none w-full bg-black hover:text-black hover:bg-gray-300 tracking-widest">
-            ADD TO CART
-          </Button>
-        </div>
+        <Link to={`/product/${_id}`}>
+          <div className="flex mt-6 tracking-wider">
+            <Button className="rounded-none w-full tracking-widest">
+              BUY NOW
+            </Button>
+            <Button className="rounded-none w-full bg-black hover:text-black hover:bg-gray-300 tracking-widest">
+              ADD TO CART
+            </Button>
+          </div>
+        </Link>
       </div>
     </div>
   );
